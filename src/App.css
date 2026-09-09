@@ -1,0 +1,6 @@
+.MuiOutlinedInput-root { background: #0d141e; color: #e6edf7; }
+.MuiOutlinedInput-notchedOutline { border-color: rgba(255,255,255,.14) !important; }
+.MuiInputLabel-root { color: #94a3b8 !important; }
+.MuiSelect-icon { color: #94a3b8; }
+.MuiSlider-rail { background-color: rgba(255,255,255,.16); }
+.MuiPaper-root { background-image: none !important; }
