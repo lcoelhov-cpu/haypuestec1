@@ -54,6 +54,7 @@ import {
 } from "@mui/icons-material";
 import "./App.css";
 import ContactPageSupabase from "./components/ContactPage";
+import QuoteRequestDialog from "./components/QuoteRequestDialog";
 
 const products = [
   {
@@ -555,7 +556,7 @@ function HomePage({ setPage, onAdd }) {
 }
 function BuilderPage() {
   const [step, setStep] = useState(0);
-  const [sent, setSent] = useState(false);
+  const [quoteDialogOpen, setQuoteDialogOpen] = useState(false);
   const parts = [
     ["Procesador", "AMD Ryzen 7 7800X3D", "Bs 3.250"],
     ["Tarjeta gráfica", "ASUS RTX 4070 Ti SUPER", "Bs 7.390"],
@@ -658,7 +659,7 @@ function BuilderPage() {
               ))}
               <Button
                 variant="contained"
-                onClick={() => setSent(true)}
+                onClick={() => setQuoteDialogOpen(true)}
                 startIcon={<Send />}
                 className="!mt-4"
               >
@@ -686,15 +687,11 @@ function BuilderPage() {
           </div>
         </Paper>
       </div>
-      <Snackbar
-        open={sent}
-        autoHideDuration={4000}
-        onClose={() => setSent(false)}
-      >
-        <Alert severity="success" onClose={() => setSent(false)}>
-          Recibimos tu configuración. Te contactaremos pronto.
-        </Alert>
-      </Snackbar>
+      <QuoteRequestDialog
+        open={quoteDialogOpen}
+        onClose={() => setQuoteDialogOpen(false)}
+        parts={parts}
+      />
     </div>
   );
 }
