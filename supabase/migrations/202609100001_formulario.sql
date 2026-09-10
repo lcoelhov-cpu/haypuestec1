@@ -1,3 +1,9 @@
+create table if not exists public.formulario (
+  "Nombre" text not null,
+  "Mail" text not null,
+  "Número de teléfono" text
+);
+
 alter table public.formulario
   alter column "Nombre" drop identity if exists;
 
