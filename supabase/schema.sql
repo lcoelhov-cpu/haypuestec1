@@ -1,5 +1,22 @@
 create extension if not exists pgcrypto;
 
+create table if not exists public.formulario (
+  "Nombre" text not null,
+  "Mail" text not null,
+  "Número de teléfono" text
+);
+
+alter table public.formulario enable row level security;
+revoke all on table public.formulario from anon, authenticated;
+grant insert ("Nombre", "Mail", "Número de teléfono") to anon, authenticated;
+
+drop policy if exists "Anyone can submit formulario" on public.formulario;
+create policy "Anyone can submit formulario"
+  on public.formulario
+  for insert
+  to anon, authenticated
+  with check (true);
+
 create table if not exists public.contact_requests (
   id uuid primary key default gen_random_uuid(),
   name text not null check (char_length(trim(name)) between 1 and 120),

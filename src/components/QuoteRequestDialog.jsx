@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField } from '@mui/material'
 import { Close, Send } from '@mui/icons-material'
-import { createContactRequest } from '../lib/supabaseService'
+import { createQuoteRequest } from '../lib/supabaseService'
 
 const initialForm = {
   name: '',
@@ -9,7 +9,7 @@ const initialForm = {
   phone: '',
 }
 
-export default function QuoteRequestDialog({ open, onClose, parts }) {
+export default function QuoteRequestDialog({ open, onClose }) {
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState(null)
   const [submitting, setSubmitting] = useState(false)
@@ -31,8 +31,7 @@ export default function QuoteRequestDialog({ open, onClose, parts }) {
     setStatus(null)
 
     try {
-      const message = `Solicitud de cotización para: ${parts.map(([label, name, price]) => `${label}: ${name} (${price})`).join('; ')}`
-      const result = await createContactRequest({ ...form, message })
+      const result = await createQuoteRequest(form)
       setForm(initialForm)
       setStatus(result.saved ? 'saved' : 'not-configured')
     } catch (error) {

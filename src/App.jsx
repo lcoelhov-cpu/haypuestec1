@@ -690,7 +690,6 @@ function BuilderPage() {
       <QuoteRequestDialog
         open={quoteDialogOpen}
         onClose={() => setQuoteDialogOpen(false)}
-        parts={parts}
       />
     </div>
   );
